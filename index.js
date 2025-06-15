@@ -3,7 +3,6 @@ const cors = require("cors");
 
 const app = express();
 
-// CORS configuration
 app.use(cors({
   origin: ['http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500'],
   credentials: true
@@ -11,11 +10,12 @@ app.use(cors({
 
 app.use(express.json());
 
-// Import routes (adjust path since we're in api/ folder)
-const authRoutes = require("../routes/authRoutes");
-const mailRoutes = require("../routes/mailRoutes");
+// Root route
+app.get("/", (req, res) => {
+  res.json({ message: "Detector Server API is running!" });
+});
 
-// Test endpoint - no /api prefix
+// Test endpoint
 app.get("/message", (req, res) => {
   res.json({ message: "Hello from backend!" });
 });
@@ -29,13 +29,13 @@ app.get("/health", (req, res) => {
   });
 });
 
-// Mount routes - no /api prefix
-app.use("/auth", authRoutes);
-app.use("/mail", mailRoutes);
-
-// Root route
-app.get("/", (req, res) => {
-  res.json({ message: "Detector Server API is running!" });
+// Handle all routes
+app.all("*", (req, res) => {
+  res.json({ 
+    message: "Route not found",
+    path: req.path,
+    method: req.method
+  });
 });
 
 module.exports = app;
