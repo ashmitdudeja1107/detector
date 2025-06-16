@@ -4,7 +4,7 @@
   "main": "index.js",
  "scripts": {
   "start": "node server.js",           
-  "init-db": "node initDB.js"
+  "init-db": "node initdb.js"
 },
   "keywords": [],
   "author": "",
