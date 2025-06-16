@@ -1,4 +1,11 @@
-const pool = require("./db"); // your DB config file
+require("dotenv").config();
+
+console.log('DATABASE_URL:', process.env.DATABASE_URL);
+
+
+const pool = require('./config/db');
+
+ // your DB config file
 
 async function initializeDatabase() {
   try {
