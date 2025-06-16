@@ -10,8 +10,10 @@ const app = express();
 // CORS configuration
 
 app.use(cors({
-  origin: "https://detectordemo.vercel.app", // your frontend domain
+  origin: ["https://detectordemo.vercel.app",'http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500'],
+  // your frontend domain
   methods: ["GET", "POST"],
+  credentials: true
 }));
 
 app.use(express.json());
