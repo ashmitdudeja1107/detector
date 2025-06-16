@@ -8,9 +8,10 @@ const mailRoutes = require("./routes/mailRoutes");
 const app = express();
 
 // CORS configuration
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500'],
-  credentials: true
+  origin: "https://detectordemo.vercel.app", // your frontend domain
+  methods: ["GET", "POST"],
 }));
 
 app.use(express.json());
