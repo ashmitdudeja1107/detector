@@ -9,16 +9,15 @@ const pool = require('./config/db');
 
 async function initializeDatabase() {
   try {
-    await pool.query(`
-      CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(255),
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255),
-  status VARCHAR(50),
-  isdeleted BOOLEAN DEFAULT false,
-  phone_number VARCHAR(20)
-);
+   
+await pool.query(`
+  CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    phone_number VARCHAR(15)
+  );
 
     `);
 
