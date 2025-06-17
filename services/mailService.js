@@ -53,7 +53,7 @@ class MailService {
   constructor() {
     this.transporter = null;
    
-    this.appUrl = process.env.APP_URL  ;
+    this.appUrl = process.env.APP_URL || 'http://localhost:3000';
     this.supportEmail = process.env.SUPPORT_EMAIL || process.env.SMTP_USER;
     this.fromEmail = process.env.SMTP_FROM || process.env.SMTP_USER;
   }
@@ -110,28 +110,6 @@ class MailService {
 
   // Send password reset email
   async sendPasswordResetEmail(email, resetToken, userName = '') {
-    try {
-      const resetLink = `${this.appUrl}/api/mail/reset-password?token=${resetToken}`;
-      
-      const mailOptions = {
-        from: {
-          name: this.appName,
-          address: this.fromEmail
-        },
-        to: email,
-        subject: `Password Reset - ${this.appName}`,
-        html: this.getPasswordResetTemplate(userName, resetLink),
-        text: this.getPasswordResetTextTemplate(userName, resetLink)
-      };
-
-      const info = await this.getTransporter().sendMail(mailOptions);
-      console.log('Password reset email sent:', info.messageId);
-      return { success: true, messageId: info.messageId };
-    } catch (error) {
-      console.error('Password reset email error:', error);
-      return { success: false, error: error.message };
-    }
-  }async sendPasswordResetEmail(email, resetToken, userName = '') {
   try {
     // ✅ FIXED: Point to frontend page with token parameter
     const resetLink = `${this.appUrl}/detectordemo/login.html?token=${resetToken}`;
