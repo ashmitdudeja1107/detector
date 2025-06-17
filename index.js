@@ -9,7 +9,7 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: ["https://detectordemo.vercel.app","https://localhost:5000"], // Only your frontend domain
+  origin: ["https://detectordemo.vercel.app","https://localhost:5500"], // Only your frontend domain
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"],
   credentials: false, // Only set to true if you're using cookies
