@@ -53,7 +53,7 @@ class MailService {
   constructor() {
     this.transporter = null;
    
-    this.appUrl = process.env.APP_URL || 'http://localhost:3000';
+    this.appUrl = process.env.APP_URL  ;
     this.supportEmail = process.env.SUPPORT_EMAIL || process.env.SMTP_USER;
     this.fromEmail = process.env.SMTP_FROM || process.env.SMTP_USER;
   }
