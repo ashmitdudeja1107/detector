@@ -8,13 +8,14 @@ const mailRoutes = require("./routes/mailRoutes");
 const app = express();
 
 // CORS configuration
+const corsOptions = {
+  origin: "https://detectordemo.vercel.app", // Only your frontend domain
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+  credentials: false, // Only set to true if you're using cookies
+};
 
-app.use(cors({
-  origin: ["https://detectordemo.vercel.app",'http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500'],
-  // your frontend domain
-  methods: ["GET", "POST"],
-  credentials: true
-}));
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
