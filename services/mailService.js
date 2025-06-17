@@ -110,31 +110,28 @@ class MailService {
 
   // Send password reset email
   async sendPasswordResetEmail(email, resetToken, userName = '') {
-  try {
-    // ✅ FIXED: Point to frontend page with token parameter
-    const resetLink = `${this.appUrl}/detectordemo/login.html?token=${resetToken}`;
-    // Alternative if your HTML is in a specific path:
-    // const resetLink = `${this.appUrl}/index.html?token=${resetToken}`;
-    
-    const mailOptions = {
-      from: {
-        name: this.appName,
-        address: this.fromEmail
-      },
-      to: email,
-      subject: `Password Reset - ${this.appName}`,
-      html: this.getPasswordResetTemplate(userName, resetLink),
-      text: this.getPasswordResetTextTemplate(userName, resetLink)
-    };
+    try {
+      const resetLink = `${this.appUrl}/api/mail/reset-password?token=${resetToken}`;
+      
+      const mailOptions = {
+        from: {
+          name: this.appName,
+          address: this.fromEmail
+        },
+        to: email,
+        subject: `Password Reset - ${this.appName}`,
+        html: this.getPasswordResetTemplate(userName, resetLink),
+        text: this.getPasswordResetTextTemplate(userName, resetLink)
+      };
 
-    const info = await this.getTransporter().sendMail(mailOptions);
-    console.log('Password reset email sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
-  } catch (error) {
-    console.error('Password reset email error:', error);
-    return { success: false, error: error.message };
+      const info = await this.getTransporter().sendMail(mailOptions);
+      console.log('Password reset email sent:', info.messageId);
+      return { success: true, messageId: info.messageId };
+    } catch (error) {
+      console.error('Password reset email error:', error);
+      return { success: false, error: error.message };
+    }
   }
-}
   // Send welcome email
   async sendWelcomeEmail(email, userName) {
     try {
